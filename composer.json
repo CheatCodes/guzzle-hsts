@@ -1,0 +1,29 @@
+{
+    "name": "cheatcodes/guzzle-hsts",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "CheatCodes",
+            "email": "cheatcodes@users.noreply.github.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "CheatCodes\\GuzzleHsts\\": "src/"
+        }
+    },
+    "require": {
+        "guzzlehttp/guzzle": "^6.2"
+    },
+    "require-dev": {
+        "phpdocumentor/phpdocumentor": "^2.9",
+        "squizlabs/php_codesniffer": "^2.7",
+        "phpunit/phpunit": "^5.5"
+    },
+    "scripts": {
+        "doc": "phpdoc",
+        "sniff": "phpcs",
+        "test": "phpunit --bootstrap=vendor/autoload.php tests/"
+    }
+}

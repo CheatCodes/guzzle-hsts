@@ -1,0 +1,85 @@
+<?xml version="1.0"?>
+<ruleset>
+    <rule ref="PSR2"/>
+
+    <file>src/</file>
+    <file>tests/</file>
+
+    <arg name="colors"/>
+
+    <rule ref="PSR1.Classes.ClassDeclaration.MissingNamespace">
+        <exclude-pattern>tests/</exclude-pattern>
+    </rule>
+
+    <!-- double quotes may not be used -->
+    <rule ref="Squiz.Strings.DoubleQuoteUsage"/>
+
+    <!-- statements may not have an empty body -->
+    <rule ref="Generic.CodeAnalysis.EmptyStatement"/>
+
+    <!-- usage of for loop that could be simplified as a while loop (no instatiation or incrementation) -->
+    <rule ref="Generic.CodeAnalysis.ForLoopShouldBeWhileLoop"/>
+
+    <!-- usage of function as test criteria in loops (-> save to variable first) -->
+    <rule ref="Generic.CodeAnalysis.ForLoopWithTestFunctionCall"/>
+
+    <!-- if/else clause may not be unconditional -->
+    <rule ref="Generic.CodeAnalysis.UnconditionalIfStatement"/>
+
+    <!-- unnecessary override of method since only call of parent -->
+    <rule ref="Generic.CodeAnalysis.UselessOverridingMethod"/>
+
+    <!-- in production code there shouldn't be any todo or fixme left over -->
+    <rule ref="Generic.Commenting.Todo"/>
+    <rule ref="Generic.Commenting.Fixme"/>
+
+    <!-- only UNIX file endings allowed -->
+    <rule ref="Generic.Files.LineEndings"/>
+
+    <!-- arguments within function calls shall be divided by exactly one space -->
+    <rule ref="Generic.Functions.FunctionCallArgumentSpacing"/>
+
+    <!-- usage of deprecated functions forbidden -->
+    <rule ref="Generic.PHP.DeprecatedFunctions"/>
+
+    <!-- Constants 'true', 'false', 'null' always lower-cased -->
+    <rule ref="Generic.PHP.LowerCaseConstant"/>
+
+    <!-- no silencing (@) operators allowed -->
+    <rule ref="Generic.PHP.NoSilencedErrors"/>
+
+    <!-- strings must not be concattenated when not necessary -->
+    <rule ref="Generic.Strings.UnnecessaryStringConcat"/>
+
+    <!-- no PERL style inline documents using # allowed -->
+    <rule ref="PEAR.Commenting.InlineComment"/>
+
+    <!-- commented out code not allowed in product environment -->
+    <rule ref="Squiz.PHP.CommentedOutCode"/>
+
+    <!-- don't allow size check function within loops -> has to be written into variables -->
+    <rule ref="Squiz.PHP.DisallowSizeFunctionsInLoops"/>
+
+    <!-- eval and alias functions (compatibility functions) not allowed in ordinary code -->
+    <rule ref="Squiz.PHP.DiscouragedFunctions"/>
+    <rule ref="Squiz.PHP.Eval"/>
+    <rule ref="Squiz.PHP.ForbiddenFunctions"/>
+
+    <!-- built-in PHP functions are to be used in lowercase -->
+    <rule ref="Squiz.PHP.LowercasePHPFunctions"/>
+
+    <!-- warns about unreachable code (i.e. after return statements) -->
+    <rule ref="Squiz.PHP.NonExecutableCode"/>
+
+    <!-- every language construct is seperated from each other with 1 space ("echo 'something';") -->
+    <rule ref="Squiz.WhiteSpace.LanguageConstructSpacing"/>
+
+    <!-- logical operators are seperated one space from operands -->
+    <rule ref="Squiz.WhiteSpace.LogicalOperatorSpacing"/>
+
+    <!-- no spaces before semicolons -->
+    <rule ref="Squiz.WhiteSpace.SemicolonSpacing"/>
+
+    <!-- no whitespaces at the beginning or end of file or the end of any lines -->
+    <rule ref="Squiz.WhiteSpace.SuperfluousWhitespace"/>
+</ruleset>
