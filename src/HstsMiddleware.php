@@ -92,8 +92,10 @@ class HstsMiddleware
             && $response->hasHeader('Strict-Transport-Security')
             && !$this->isIpAddress($domainName)
         ) {
+            $header = $response->getHeader('Strict-Transport-Security');
+
             // Only process the first header, https://tools.ietf.org/html/rfc6797#section-8.1
-            $policy = $this->parseHeader(array_shift($response->getHeader('Strict-Transport-Security')));
+            $policy = $this->parseHeader(array_shift($header));
 
             if (isset($policy['max-age'])) {
                 if ($policy['max-age'] < 1) {
