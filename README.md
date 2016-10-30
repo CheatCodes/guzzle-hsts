@@ -4,7 +4,7 @@ guzzle-hsts
 [![Build Status](https://img.shields.io/travis/CheatCodes/guzzle-hsts/master.svg?style=flat-square)](https://travis-ci.org/CheatCodes/guzzle-hsts)
 [![Coverage Status](https://img.shields.io/scrutinizer/coverage/g/CheatCodes/guzzle-hsts.svg?style=flat-square)](https://scrutinizer-ci.com/g/CheatCodes/guzzle-hsts/code-structure)
 [![Quality Score](https://img.shields.io/scrutinizer/g/cheatcodes/guzzle-hsts.svg?style=flat-square)](https://scrutinizer-ci.com/g/CheatCodes/guzzle-hsts/)
-[![Software License](https://img.shields.io/github/license/cheatcodes/guzzle-hsts.svg?style=flat-square)](LICENSE)
+[![Software License](https://img.shields.io/github/license/cheatcodes/guzzle-hsts.svg?style=flat-square&maxAge=86400)](LICENSE)
 [![Packagist Version](https://img.shields.io/packagist/v/cheatcodes/guzzle-hsts.svg?style=flat-square)](https://packagist.org/packages/cheatcodes/guzzle-hsts)
 
 This is a [Guzzle](https://github.com/guzzle/guzzle) middleware to handle
@@ -23,7 +23,7 @@ Usage
 -----
 
 Make sure Guzzle uses the `CheatCodes\GuzzleHsts\HstsMiddleware::handler()` as a middleware by pushing it onto the
-handler stack. After that, for all known HSTS hosts all requests to http will be automatically rewritten to https.
+handler stack. After that, all http requests to known HSTS hosts will be automatically rewritten to https.
 
 An example:
 
