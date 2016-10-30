@@ -452,4 +452,20 @@ class MiddlewareTest extends TestCase
 
         $this->assertEquals('https', $request->getUri()->getScheme());
     }
+
+    public function testInvalidStore()
+    {
+        $handler = HandlerStack::create();
+
+        $handler->push(HstsMiddleware::handler());
+
+        $client = new Client([
+            'handler'    => $handler,
+            'hsts_store' => 'invalid store',
+        ]);
+
+        $this->expectException(InvalidArgumentException::class);
+
+        $client->request('GET', 'http://example.com');
+    }
 }
