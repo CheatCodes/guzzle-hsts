@@ -203,6 +203,34 @@ class MiddlewareTest extends TestCase
         $this->assertEquals('http', $request->getUri()->getScheme());
     }
 
+    public function testSuperdomainWithoutIncludeSubDomains()
+    {
+        $container = [];
+
+        $mock = new MockHandler([
+            new Response(200, ['Strict-Transport-Security' => 'max-age=31536000']),
+            new Response(200),
+        ]);
+
+        $handler = HandlerStack::create($mock);
+
+        $handler->push(HstsMiddleware::handler());
+        $handler->push(Middleware::history($container));
+
+        $client = new Client(['handler' => $handler]);
+
+        $client->request('GET', 'https://example.com/');
+
+        $client->request('GET', 'http://foobar.example.com/');
+
+        $this->assertCount(2, $container);
+
+        /** @var \GuzzleHttp\Psr7\Request $request */
+        $request = $container[1]['request'];
+
+        $this->assertEquals('http', $request->getUri()->getScheme());
+    }
+
     public function testIpAddressHost()
     {
         $container = [];
