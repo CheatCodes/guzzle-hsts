@@ -119,30 +119,50 @@ class HstsMiddleware
      *
      * @param StoreInterface $store
      * @param string         $domainName
+     * @param bool           $includeSubDomains
      * @return bool
      */
-    private function isKnownHstsHosts(StoreInterface $store, $domainName)
+    private function checkHstsDomain(StoreInterface $store, $domainName, $includeSubDomains)
     {
-        // Check full domain
-        if ($store->get($domainName) !== false) {
-            return true;
-        }
+        $policy = $store->get($domainName);
 
-        // Check superdomains
+        return $policy !== false && (!$includeSubDomains || isset($policy['includesubdomains']));
+    }
+
+    /**
+     * Check if the given domain's superdomains are known HSTS hosts
+     *
+     * @param StoreInterface $store
+     * @param string         $domainName
+     * @return bool
+     */
+    private function checkHstsSuperdomains(StoreInterface $store, $domainName)
+    {
         $labels = explode('.', $domainName);
         $labelCount = count($labels);
 
         for ($i = 1; $i < $labelCount; ++$i) {
             $domainName = implode('.', array_slice($labels, $labelCount - $i));
 
-            $policy = $store->get($domainName);
-
-            if ($policy !== false && isset($policy['includesubdomains'])) {
+            if ($this->checkHstsDomain($store, $domainName, true)) {
                 return true;
             }
         }
 
         return false;
+    }
+
+    /**
+     * Check if the given domain or a superdomain is a known HSTS host
+     *
+     * @param StoreInterface $store
+     * @param string         $domainName
+     * @return bool
+     */
+    private function isKnownHstsHosts(StoreInterface $store, $domainName)
+    {
+        return $this->checkHstsDomain($store, $domainName, false)
+            || $this->checkHstsSuperdomains($store, $domainName);
     }
 
     /**
